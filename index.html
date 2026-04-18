@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant URL shortener · sleek transitions</title>
+    <!-- Poppins & Inter hybrid: clean, modern sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 6 (free) for subtle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f7f9fc 0%, #f1f4f8 100%);
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #1e293b;
+        }
+
+        .app-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(2px);
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -8px rgba(0, 20, 30, 0.15), 0 2px 6px -2px rgba(0, 0, 0, 0.02);
+            padding: 2rem 2.2rem 2.5rem 2.2rem;
+            transition: box-shadow 0.25s ease, transform 0.2s ease;
+        }
+
+        .app-card:hover {
+            box-shadow: 0 24px 42px -12px rgba(0, 35, 50, 0.18);
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.2rem;
+            color: #0a1a2b;
+        }
+
+        h1 i {
+            color: #2563eb;
+            font-size: 2.1rem;
+            background: #eef4ff;
+            padding: 0.45rem;
+            border-radius: 18px;
+        }
+
+        .subhead {
+            font-size: 0.95rem;
+            color: #4b5a6e;
+            margin-left: 0.3rem;
+            margin-bottom: 2.3rem;
+            font-weight: 400;
+            border-left: 3px solid #a5c0fa;
+            padding-left: 1rem;
+        }
+
+        /* ————— form area ————— */
+        .url-form {
+            background: #f9fbfe;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.8rem;
+            border: 1px solid #ffffff70;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02), 0 5px 12px -8px rgba(0, 45, 65, 0.1);
+            transition: background 0.2s;
+        }
+
+        .url-form:hover {
+            background: #ffffff;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 2 1 260px;
+        }
+
+        .input-field.alias-field {
+            flex: 1 1 200px;
+        }
+
+        .input-field label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            font-weight: 600;
+            color: #3f5170;
+            margin-bottom: 0.4rem;
+            margin-left: 0.5rem;
+        }
+
+        .input-field label i {
+            font-size: 0.7rem;
+            margin-right: 0.2rem;
+            color: #3b6cb7;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 60px;
+            padding: 0.1rem 0.1rem 0.1rem 1.2rem;
+            border: 1px solid #d9e2ef;
+            transition: border 0.15s ease, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 20, 30, 0.02);
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #7ba3f6;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .input-wrapper i {
+            color: #778ea8;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            border: none;
+            padding: 0.9rem 0.8rem 0.9rem 0;
+            font-size: 0.95rem;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            color: #1a2634;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9aafc9;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .alias-prefix {
+            display: flex;
+            align-items: center;
+            background: #eef3fa;
+            border-radius: 40px 0 0 40px;
+            padding: 0 0.7rem 0 1rem;
+            color: #1f3a68;
+            font-weight: 500;
+            font-size: 0.95rem;
+            gap: 0.2rem;
+        }
+
+        .alias-prefix span {
+            background: #dae6f8;
+            padding: 0.15rem 0.5rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1d4a8b;
+        }
+
+        .alias-prefix i {
+            color: #5478a7;
+        }
+
+        .input-wrapper.alias .alias-prefix+input {
+            padding-left: 0.8rem;
+        }
+
+        .action-button {
+            background: #1e2e4f;
+            border: none;
+            color: white;
+            font-weight: 500;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 6px 14px -8px #13233e;
+            border: 1px solid #25456e;
+            margin-top: 0.25rem;
+            white-space: nowrap;
+        }
+
+        .action-button i {
+            font-size: 0.95rem;
+        }
+
+        .action-button:hover {
+            background: #253c62;
+            box-shadow: 0 10px 18px -10px #182b47;
+        }
+
+        .action-button:active {
+            transform: scale(0.98);
+            background: #17263f;
+        }
+
+        /* ————— table ————— */
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+
+        .history-header h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #1f3147;
+        }
+
+        .history-header h2 i {
+            color: #2563eb;
+            background: #dfeaff;
+            padding: 0.3rem;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+
+        .badge-light {
+            background: #e8edf5;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            color: #384e6f;
+            font-weight: 500;
+        }
+
+        .table-wrapper {
+            border-radius: 22px;
+            background: #ffffff;
+            border: 1px solid #eef3fb;
+            overflow-x: auto;
+            box-shadow: 0 10px 20px -15px rgba(0, 32, 64, 0.15);
+            transition: box-shadow 0.2s;
+        }
+
+        .table-wrapper:hover {
+            box-shadow: 0 18px 28px -18px #192b44;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 1.2rem 1.5rem 0.9rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #536c8a;
+            border-bottom: 1px solid #dde5f0;
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eef2f8;
+            color: #1f2f40;
+            transition: background 0.12s;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f5faff;
+        }
+
+        .short-link {
+            font-weight: 500;
+            color: #1d3a6d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .short-link i {
+            color: #3b7cce;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .copy-badge {
+            background: transparent;
+            border: none;
+            color: #5475b3;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.12s;
+            margin-left: 0.2rem;
+            border: 1px solid #cedef5;
+        }
+
+        .copy-badge:hover {
+            background: #e1edff;
+            color: #1f4590;
+            border-color: #a1bef0;
+        }
+
+        .long-url-preview {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #406080;
+            font-size: 0.9rem;
+        }
+
+        .alias-tag {
+            background: #e6efff;
+            border-radius: 30px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #264e86;
+            display: inline-block;
+            border: 1px solid transparent;
+            transition: background 0.2s;
+        }
+
+        tr:hover .alias-tag {
+            background: #d6e5ff;
+            border-color: #b7d0f5;
+        }
+
+        .clicks-badge {
+            background: #f2f6fc;
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #34537b;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        /* ————— footer / demo info ————— */
+        .demo-note {
+            margin-top: 1.8rem;
+            font-size: 0.8rem;
+            color: #657e9e;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-note i {
+            color: #83a3d4;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px dashed #cbd6e8;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        /* small screens */
+        @media (max-width: 600px) {
+            .app-card {
+                padding: 1.5rem;
+            }
+
+            .url-form {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* dummy placeholder for alias: we show prefix elegantly */
+    </style>
+</head>
+
+<body>
+    <div class="app-card">
+        <h1>
+            <i class="fa-solid fa-scissors"></i>
+            Shortify
+        </h1>
+        <div class="subhead">
+            <i class="fa-regular fa-pen-to-square" style="margin-right: 6px;"></i>
+            link shrinker · alias defaults to random string
+        </div>
+
+        <!-- form section -->
+        <div class="url-form">
+            <form id="shortenForm">
+                <div class="input-group">
+                    <!-- long url field -->
+                    <div class="input-field">
+                        <label><i class="fa-regular fa-link"></i> Long URL</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-paste"></i>
+                            <input type="url" id="longUrl" placeholder="https://example.com/very/long/path?with=params"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- alias field with default / random hint -->
+                    <div class="input-field alias-field">
+                        <label><i class="fa-regular fa-keyboard"></i> Alias (optional)</label>
+                        <div class="input-wrapper alias">
+                            <div class="alias-prefix">
+                                <i class="fa-regular fa-at"></i>
+                                <span>short.ly/</span>
+                            </div>
+                            <input type="text" id="alias" placeholder="e.g. my-link or leave empty">
+                        </div>
+                    </div>
+
+                    <!-- submit button -->
+                    <button type="submit" class="action-button">
+                        <i class="fa-regular fa-circle-check"></i> Shorten
+                    </button>
+                </div>
+                <div style="font-size: 0.75rem; margin-top: 0.8rem; margin-left: 0.6rem; color: #5573a5;">
+                    <i class="fa-regular fa-shuffle"></i> alias defaults to a random string (e.g. Xk9fG)
+                </div>
+            </form>
+        </div>
+
+        <!-- history table -->
+        <div class="history-header">
+            <h2><i class="fa-regular fa-clock"></i> Previously shortened</h2>
+            <div class="badge-light"><i class="fa-regular fa-copy"></i> 4 entries</div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Short link</th>
+                        <th>Original URL</th>
+                        <th>Alias</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody id="shortenTableBody">
+                    <!-- rows will be injected from demo data (static but with modern feel) -->
+                    <!-- we keep it as static preview, yet fully interactive look -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- subtle decoration & demo note (frontend showcase) -->
+        <hr>
+        <div class="demo-note">
+            <i class="fa-regular fa-gem"></i> modern, clean &mdash; subtle &nbsp;
+            <i class="fa-regular fa-star"></i>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // ---------- DEMO / MOCK DATA ----------
+            // pre-filled table entries (to match “previously shortened URLs”)
+            demoShortUrls = [
+                { long: 'https://www.notion.so/Documentation-URL-Shortener-9b2b8f1a2d3e4f5g6h7i', alias: 'wikiDoc', short: 'short.ly/wikiDoc', clicks: 214 },
+                { long: 'https://github.com/facebook/react/issues/24532', alias: 'reactIssue', short: 'short.ly/reactIssue', clicks: 89 },
+                { long: 'https://www.figma.com/community/file/11234567890/design-system', alias: 'figmaDs', short: 'short.ly/figmaDs', clicks: 43 },
+                { long: 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', alias: 'chillMix', short: 'short.ly/chillMix', clicks: 612 }
+            ];
+           
+
+            // populate table
+            const tbody = document.getElementById('shortenTableBody');
+
+            function renderRows(rowsArray) {
+                tbody.innerHTML = '';
+                rowsArray.forEach(item => {
+                    const tr = document.createElement('tr');
+
+                    // short link cell
+                    const tdShort = document.createElement('td');
+                    tdShort.className = 'short-link';
+                    tdShort.innerHTML = `<i class="fa-regular fa-link-simple"></i> ${item.short} 
+                        <button class="copy-badge" title="copy short url"><i class="fa-regular fa-copy"></i> copy</button>`;
+
+                    // long url cell
+                    const tdLong = document.createElement('td');
+                    tdLong.className = 'long-url-preview';
+                    tdLong.textContent = item.long;
+
+                    // alias cell with tag style
+                    const tdAlias = document.createElement('td');
+                    tdAlias.innerHTML = `<span class="alias-tag"><i class="fa-regular fa-hashtag" style="opacity:0.7;"></i> ${item.alias}</span>`;
+
+                    // clicks cell
+                    const tdClicks = document.createElement('td');
+                    tdClicks.innerHTML = `<span class="clicks-badge"><i class="fa-regular fa-eye"></i> ${item.clicks}</span>`;
+
+                    tr.appendChild(tdShort);
+                    tr.appendChild(tdLong);
+                    tr.appendChild(tdAlias);
+                    tr.appendChild(tdClicks);
+
+                    // optional copy simulation (just alert for demo)
+                    const copyBtn = tr.querySelector('.copy-badge');
+                    copyBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        alert(`🔗 Copied demo link: ${item.short} (simulated)`);
+                    });
+
+                    tbody.appendChild(tr);
+                });
+            }
+
+             window.addEventListener('DOMContentLoaded', async () => {
+                try {
+                    const res = await fetch('/all-links'); // call the backend route
+                    demoShortUrls = await res.json(); // get JSON array
+
+                    console.log(demoShortUrls); // check in console
+                    renderRows(demoShortUrls); // call your function to show links
+                } catch (err) {
+                    console.error('Failed to fetch links:', err);
+                }
+            });
+            
+
+            // ---------- FORM SUBMIT HANDLE (add new row with random alias if needed) ----------
+            const form = document.getElementById('shortenForm');
+            const longInput = document.getElementById('longUrl');
+            const aliasInput = document.getElementById('alias');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const longUrl = longInput.value.trim();
+                if (!longUrl) {
+                    alert('please enter a long URL');
+                    return;
+                }
+                let alias = aliasInput.value.trim();
+                // create new row object
+                const newEntry = {
+                    long: longUrl,
+                    alias: alias,
+                    clicks: 0  // fresh entry
+                };
+                try {
+
+                    const res = await fetch("/data", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(newEntry)
+                    });
+                    demoShortUrls = await res.json();
+                    renderRows(demoShortUrls);
+                } catch (err) {
+                    alert("Failed");
+                    console.log(arr);
+                }
+
+                // reset fields (keep alias optional, but clear)
+                longInput.value = '';
+                aliasInput.value = '';
+
+                // subtle user feedback (optional)
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-regular fa-check"></i> Added!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 900);
+            });
+
+            // optional: add some random placeholder in alias as hint (we already have placeholder)
+            // also we want to show a small random example in alias field on focus? not needed
+
+            // just for extra charm: double click on alias field generates random suggestion
+            aliasInput.addEventListener('dblclick', (e) => {
+                const rand = randomAlias(5);
+                aliasInput.value = rand;
+                // tiny pulse effect (ignore)
+            });
+        })();
+    </script>
+    <!-- subtle note: shadows and transitions are kept moderate, just as requested -->
+</body>
+
+</html>
